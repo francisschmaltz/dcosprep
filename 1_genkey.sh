@@ -177,7 +177,7 @@ for HOST in $HOSTS; do
     ssh -o StrictHostKeyChecking=no -i ${INIT_KEY} ${INIT_USER}@$HOST "sudo rm $SCRIPT"
     echo "Updating Public Key for Zetaadm user"
     ssh -o StrictHostKeyChecking=no -i ${INIT_KEY} ${INIT_USER}@$HOST "sudo mkdir -p /home/zetaadm/.ssh && echo \"$PUB\"|sudo tee -a /home/zetaadm/.ssh/authorized_keys && sudo chown -R zetaadm:zetaadm /home/zetaadm/.ssh && sudo chmod 700 /home/zetaadm/.ssh && sudo chmod 600 /home/zetaadm/.ssh/authorized_keys"
-    INTER_IP=$(ssh -o StrictHostKeyChecking=no -i ${INIT_KEY} ${INIT_USER}@$HOST "source /etc/profile && ip addr show eth0 | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1")
+    INTER_IP=$(ssh -o StrictHostKeyChecking=no -i ${INIT_KEY} ${INIT_USER}@$HOST "source /etc/profile && ip addr show ens160 | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1")
     echo $INTER_IP >> ./internal_hosts.txt
 
   if [ "$HSTCNT" == "1" ]; then
